@@ -11,7 +11,10 @@ declare module dependency in `ApplicationContainer`:
 from logos.context import ApplicationContainer, Context
 
 app = ApplicationContainer(
-    modules=["logos_persistence"]
+    modules=[
+        "logos_persistence",
+        "[your-package]"
+    ]
 )
 
 app.run()
