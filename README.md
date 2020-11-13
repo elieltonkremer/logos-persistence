@@ -23,7 +23,7 @@ app.run()
 declare your modules extending `logos_persistence.models:Model` class: 
 
 ```py
-from logos_persistence.models import Model, CharField
+from logos_persistence.models import Model, CharField, PrimaryKeyField, BooleanField
 
 
 class Task(Model):
@@ -35,7 +35,7 @@ class Task(Model):
 
 declare class in `[your-package]/__init__.py` container with `app.models` prefix
 
-```
+```py
 from logos.context import Container, Class
 
 container = Container({

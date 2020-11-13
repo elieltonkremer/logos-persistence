@@ -1,5 +1,5 @@
 from typing import Generic, TypeVar, Union, Type
-from peewee import Model
+from logos_persistence.models import Model
 from logos.context import context
 
 
@@ -31,6 +31,14 @@ class Manager(Generic[T]):
         obj.delete_instance()
         self._dispatch_event('after_delete', obj)
         return obj
+
+    def increment(self, obj: Union[T, Model], field: str, quantity: int = 1):
+        self._dispatch_event(f'before_increment', {self.resource_name: obj, 'field': field, 'quantity': quantity})
+        self.entity_class.update(**{
+            field: getattr(self.entity_class, field) + quantity
+        }).where(obj._pk_expr())
+        obj.reload([field])
+        self._dispatch_event(f'after_increment', {self.resource_name: obj, 'field': field, 'quantity': quantity})
 
     def _dispatch_event(self, event_name: str, obj: Union[T, Model]):
         if not context.has('app.listener'):
