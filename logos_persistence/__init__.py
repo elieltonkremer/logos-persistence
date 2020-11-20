@@ -3,6 +3,7 @@ from logos.context import Container, Service, Class, ResourceGroup
 
 container = Container({
     'groups.models': ResourceGroup(r'^app.models.'),
+    'app.request_middleware.database': Class('logos_persistence.middleware:DatabaseMiddleware'),
     'app.database': Service(
         klz='peewee:SqliteDatabase',
         parameters={
