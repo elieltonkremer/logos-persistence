@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='logos-persistence',
-    version='0.2',
+    version='0.2.1',
     packages=['logos_persistence'],
     url='',
     license='MIT',
